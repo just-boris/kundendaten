@@ -6,7 +6,7 @@ import NumericInput from '../numeric-input';
 
 function App({account, updateAccount, saveAccount}) {
   return (<div>
-    <h1>Kundedaten</h1>
+    <h1>Kundendaten</h1>
     <Input name="firstName" value={account.firstName} label="Vorname" onChange={updateAccount} />
     <Input name="lastName" value={account.lastName} label="Name" onChange={updateAccount} />
     <h2>Einkommen</h2>
