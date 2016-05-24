@@ -1,0 +1,18 @@
+.app {
+    width: 400px;
+    margin: 3em auto;
+    &__row {
+        padding: 1em 0;
+        &_center {
+            text-align: center;
+        }
+    }
+    &__save {
+        cursor: pointer;
+        padding: 0.5em 1em;
+        font-size: 14px;
+        background: #4aa540;
+        color: #fff;
+        border: 0;
+    }
+}

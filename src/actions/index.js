@@ -11,6 +11,6 @@ export function updateAccount(fieldName, value) {
 
 export function saveAccount() {
   return (dispatch, getState) => {
-      console.log(getState());
+      console.log(getState().account);
   }
 };

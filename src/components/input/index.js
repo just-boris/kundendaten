@@ -1,7 +1,10 @@
+import './styles.css';
+
 export default function Input({name, label, value, onChange, readOnly}) {
-  return (<label>
-    {label}
-    <input type="text" name={name} defaultValue={value} onBlur={(e) => onChange(e.target.name, e.target.value)} />
+  return (<label className="input">
+    <div className="input__label">{label}</div>
+    <input type="text" className="input__control" name={name} defaultValue={value}
+        onBlur={(e) => onChange(e.target.name, e.target.value)} />
   </label>);
 }
 
