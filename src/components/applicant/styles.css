@@ -1,0 +1,16 @@
+.applicant {
+    max-width: 500px;
+    flex: 1;
+    padding: 0 1em;
+    &__action {
+        font-weight: normal;
+        font-size: 14px;
+        text-decoration: underline;
+        margin-left: 1em;
+        cursor: pointer;
+        color: #4f81ee;
+        &:hover {
+            color: #3d64b9;
+        }
+    }
+}

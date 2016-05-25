@@ -1,11 +1,13 @@
 .app {
-    width: 400px;
-    margin: 3em auto;
     &__row {
         padding: 1em 0;
         &_center {
             text-align: center;
         }
+    }
+    &__applicants {
+        display: flex;
+        justify-content: center;
     }
     &__save {
         cursor: pointer;

@@ -1,16 +1,30 @@
-export const UPDATE_ACCOUNT = 'scsi/UPDATE_ACCOUNT';
-export const SAVE_ACCOUNT = 'scsi/SAVE_ACCOUNT';
+export const ADD_APPLICANT = 'scsi/ADD_APPLICANT';
+export const REMOVE_APPLICANT = 'scsi/REMOVE_APPLICANT';
+export const UPDATE_APPLICANT = 'scsi/UPDATE_APPLICANT';
+export const SAVE_APPLICANT = 'scsi/SAVE_APPLICANT';
 
-export function updateAccount(fieldName, value) {
+export function addApplicant() {
+    return {
+        type: ADD_APPLICANT
+    };
+}
+
+export function removeApplicant(applicant) {
+    return {
+        type: REMOVE_APPLICANT,
+        applicant
+    };
+}
+
+export function updateApplicant(index, fieldName, value) {
   return {
-    type: UPDATE_ACCOUNT,
-    fieldName, value
+    type: UPDATE_APPLICANT,
+    index, fieldName, value
   };
-};
+}
 
-
-export function saveAccount() {
+export function saveApplicant() {
   return (dispatch, getState) => {
-      console.log(getState().account);
-  }
-};
+      console.log(getState().applicants); //eslint-disable-line no-console
+  };
+}

@@ -1,4 +1,4 @@
-import account from './account';
+import applicants from './applicants';
 import {combineReducers} from 'redux';
 
-export default combineReducers({account});
+export default combineReducers({applicants});
