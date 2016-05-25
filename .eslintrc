@@ -1,0 +1,24 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+          "jsx": true
+      }
+  },
+  "env": {
+    "es6": true,
+    "browser": true
+  },
+  "plugins": [
+      "react"
+  ],
+  "rules": {
+    "quotes": [2, "single"],
+    "one-var": [2, "never"],
+    "semi": [2, "always"],
+    "react/react-in-jsx-scope": 0,
+    "react/prop-types": 1
+  }
+}

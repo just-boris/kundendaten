@@ -1,4 +1,5 @@
 import Input from '../input';
+import {PropTypes} from 'react';
 
 function formatNumber(number) {
     return number && number.toString().replace('.', ',');
@@ -19,6 +20,11 @@ export default function NumericInput(props) {
         onChange(name, value) {
             onChange(name, parseNumber(value));
         }
-    })
+    });
     return <Input {...props} />;
 }
+
+NumericInput.propTypes = {
+    onChange: PropTypes.func,
+    value: PropTypes.number
+};

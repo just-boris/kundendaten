@@ -1,7 +1,7 @@
-import {ADD_APPLICANT, REMOVE_APPLICANT, UPDATE_APPLICANT, SAVE_APPLICANT} from '../actions';
+import {ADD_APPLICANT, REMOVE_APPLICANT, UPDATE_APPLICANT} from '../actions';
 
 function newApplicant() {
-    return {total: 0}
+    return {total: 0};
 }
 
 function calculateTotal({salary = 0, otherIncome = 0, rent = 0, otherExpense = 0}) {
@@ -10,12 +10,13 @@ function calculateTotal({salary = 0, otherIncome = 0, rent = 0, otherExpense = 0
 
 function applicantReducer(state, action) {
     switch (action.type) {
-        case UPDATE_APPLICANT:
+        case UPDATE_APPLICANT: {
             const newState = Object.assign({}, state, {
                 [action.fieldName]: action.value
             });
             newState.total = calculateTotal(newState);
             return newState;
+        }
         default:
             return state;
     }
@@ -24,7 +25,7 @@ function applicantReducer(state, action) {
 export default function(state = [newApplicant()], action) {
     switch (action.type) {
         case ADD_APPLICANT:
-            return [...state, newApplicant()]
+            return [...state, newApplicant()];
         case REMOVE_APPLICANT:
             return state.filter(applicant => applicant !== action.applicant);
         case UPDATE_APPLICANT:

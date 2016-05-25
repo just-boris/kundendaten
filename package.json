@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack --optimize-minimize",
     "start": "webpack-dev-server --hot --inline",
+    "pretest": "eslint src/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -17,6 +18,8 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
     "css-loader": "^0.23.1",
+    "eslint": "^2.10.2",
+    "eslint-plugin-react": "^5.1.1",
     "html-webpack-plugin": "^2.17.0",
     "postcss-import": "^8.1.2",
     "postcss-loader": "^0.9.1",
