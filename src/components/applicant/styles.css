@@ -1,10 +1,18 @@
+@import "../../variables.css";
+
 .applicant {
     max-width: 500px;
     flex: 1;
-    padding: 0 1em;
+    padding: 1em;
+    & + & {
+        border-left: 1px solid $border-color
+    }
+    &__title {
+        margin: 0 0 0.5em;
+    }
     &__action {
+        float: right;
         font-weight: normal;
-        font-size: 14px;
         text-decoration: underline;
         margin-left: 1em;
         cursor: pointer;

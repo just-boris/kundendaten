@@ -1,0 +1,13 @@
+@import "../../variables";
+
+.accordion {
+    &__title {
+        margin: 0;
+        padding: 0.5em 0;
+        cursor: pointer;
+        border-bottom: 1px solid $border-accent-color;
+    }
+    &__body {
+        padding-top: 1em;
+    }
+}

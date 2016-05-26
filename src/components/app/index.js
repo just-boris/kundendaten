@@ -10,7 +10,7 @@ function App({applicants, saveApplicant}) {
     }
 
     return (<form className="app" onSubmit={onSubmit}>
-        <h1>Kundendaten</h1>
+        <h1 className="app__header">Kundendaten</h1>
         <div className="app__row app__applicants">
             {applicants.map((applicant, index) =>
                 <Applicant applicant={applicant} index={index} key={index}
