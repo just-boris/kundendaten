@@ -11,9 +11,9 @@
     }
     &__save {
         cursor: pointer;
-        padding: 0.5em 1em;
+        padding: 0.8em 1.5em 0.75em 1.5em;
         font-size: 14px;
-        background: #4aa540;
+        background: #2B8E00;
         color: #fff;
         border: 0;
     }
