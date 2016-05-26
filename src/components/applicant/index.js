@@ -4,6 +4,15 @@ import {connect} from 'react-redux';
 import Input from '../input';
 import Output from '../output';
 import NumericInput from '../numeric-input';
+import Select from '../select';
+
+const accomodationOptions = [
+    {value: 'ESTATE', name: 'Wohneigentum'},
+    {value: 'MILITARY', name: 'beim Militär'},
+    {value: 'PARENTS', name: 'bei den Eltern'},
+    {value: 'RENT', name: 'zur Miete'},
+    {value: 'RENT_FREE', name: 'Mietfrei'}
+];
 
 function Applicant({applicant, index, addApplicant, updateApplicant, removeApplicant, allowAdd, allowRemove}) {
     function onChange(name, value) {
@@ -19,10 +28,11 @@ function Applicant({applicant, index, addApplicant, updateApplicant, removeAppli
         <Input name="lastName" value={applicant.lastName} label="Name" onChange={onChange} />
         <h2>Einkommen</h2>
         <NumericInput name="salary" label="Gehalt" value={applicant.salary} onChange={onChange} />
-        <NumericInput name="otherIncome" label="Andere Einkommen" value={applicant.salary} onChange={onChange} />
-        <h2>Expenses</h2>
+        <NumericInput name="otherIncome" label="Sonstige Einkommen" value={applicant.salary} onChange={onChange} />
+        <h2>Ausgaben</h2>
         <NumericInput name="rent" label="Miete" onChange={onChange} />
-        <NumericInput name="otherExpense" label="Andere Expense" onChange={onChange} />
+        <NumericInput name="otherExpense" label="Sonstige Ausgaben" onChange={onChange} />
+        <Select name="accomodationType" label="Wohnsituation" options={accomodationOptions} onChange={onChange} />
         <h2>Gesamt</h2>
         <Output name="total" label="Ergebnis" value={applicant.total} />
     </div>);

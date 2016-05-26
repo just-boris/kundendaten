@@ -3,6 +3,7 @@
     align-items: center;
     margin-bottom: 0.3em;
     &__label, &__control {
+        box-sizing: border-box;
         width: 50%;
     }
     &__label {
