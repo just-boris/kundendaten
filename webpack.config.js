@@ -5,12 +5,14 @@ const path = require('path');
 const NODE_ENV = process.argv.indexOf('--optimize-minimize') > -1 ? 'production' : 'development';
 
 module.exports = {
-    entry: './src',
+    entry: {
+        app: './src'
+    },
 
     output: {
         path: path.join(__dirname, 'build'),
         publicPath: '/',
-        filename: 'app.js'
+        filename: '[name].js'
     },
 
     devtool: 'source-map',

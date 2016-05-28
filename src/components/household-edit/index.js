@@ -25,19 +25,28 @@ const estateType = [
     {value: 'NONE', name: 'Kein Immobilienbesitz'}
 ];
 
+function ApplicantHousehold({applicant, index, onChange}) {
+    const handleChange = (name, value) => onChange(index, name, value);
+    const sharedSettings = index > 0 ? (<div>
+        <Select label="Beziehung zwischen KN" name="applicantsRelationshipType"
+            value={applicant.applicantsRelationshipType} options={relationshipOptions}
+            onChange={handleChange} />
+        <Checkbox label="Gemeinsamer Haushalt" name="sharedHousehold" onChange={handleChange} />
+    </div>) : null;
+    return (<div className="applicants__col">
+        <NumericInput name="numberOfPersonsInHousehold" label="Anzahl Personen im HH" value={applicant.salary} onChange={handleChange} />
+        <NumericInput name="numberOfChildren" label="Davon Kinder" value={applicant.salary} onChange={handleChange} />
+        <Select name="accomodationType" label="Wohnsituation" options={accomodationOptions} onChange={handleChange} />
+        <Select name="fullyRentedEstateType" label="Art der vermieteten Immobilie" options={estateType} onChange={handleChange} />
+        {sharedSettings}
+    </div>);
+}
+
 
 export default function PersonEdit({applicants, onChange}) {
     return (<Accordion title="Haushalt">
         <div className="applicants">
-            {applicants.map((applicant, index) => (<div className="applicants__col" key={index}>
-                <Select label="Beziehung zwischen KN" name="applicantsRelationshipType"
-                    value={applicant.applicantsRelationshipType} options={relationshipOptions} />
-                <Checkbox label="Gemeinsamer Haushalt" name="sharedHousehold" onChange={(name, value) => onChange(index, name, value)} />
-                <NumericInput name="numberOfPersonsInHousehold" label="Anzahl Personen im HH" value={applicant.salary} onChange={(name, value) => onChange(index, name, value)} />
-                <NumericInput name="numberOfChildren" label="Davon Kinder" value={applicant.salary} onChange={(name, value) => onChange(index, name, value)} />
-                <Select name="accomodationType" label="Wohnsituation" options={accomodationOptions} onChange={(name, value) => onChange(index, name, value)} />
-                <Select name="fullyRentedEstateType" label="Art der vermieteten Immobilie" options={estateType} onChange={(name, value) => onChange(index, name, value)} />
-            </div>))}
+            {applicants.map((applicant, index) => <ApplicantHousehold key={index} {...{applicant, index, onChange}} />)}
         </div>
     </Accordion>);
 }

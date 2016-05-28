@@ -1,9 +1,11 @@
+import './styles.css';
 import {PropTypes} from 'react';
 
 export default function Checkbox({label, name, value, onChange}) {
-    return (<label className="input">
-        <input type="checkbox" name={name} defaultValue={value} onChange={(e) => onChange(e.target.name, e.target.checked)} />
-        <div className="input__label">{label}</div>
+    return (<label className="checkbox">
+        <input type="checkbox" className="checkbox__control"
+            name={name} defaultValue={value} onChange={(e) => onChange(e.target.name, e.target.checked)} />
+        <span className="checkbox__label">{label}</span>
     </label>);
 }
 

@@ -3,9 +3,12 @@
 .accordion {
     &__title {
         margin: 0;
-        padding: 0.5em 0;
+        padding-bottom: 0.5em;
         cursor: pointer;
         border-bottom: 1px solid $border-accent-color;
+        .accordion:hover & {
+            border-bottom-color: #999;
+        }
     }
     &__icon {
         float: right;

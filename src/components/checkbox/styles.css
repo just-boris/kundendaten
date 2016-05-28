@@ -1,0 +1,13 @@
+.checkbox {
+    display: block;
+    margin-bottom: 10px;
+    &:before {
+        content: ' ';
+        display: inline-block;
+        width: 33.33%;
+        min-width: 150px;
+    }
+    &__control {
+        margin-right: 0.5em;
+    }
+}
