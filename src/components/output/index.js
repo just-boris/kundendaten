@@ -1,7 +1,10 @@
 import {PropTypes} from 'react';
+import Input from '../input';
 
 export default function Output({label, value}) {
-    return (<span>{label}: {value}</span>);
+    return (<Input label={label}>
+        <strong className="input__display">{value}</strong>
+    </Input>);
 }
 
 Output.propTypes = {

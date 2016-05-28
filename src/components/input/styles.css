@@ -2,17 +2,18 @@
     display: flex;
     align-items: center;
     margin-bottom: 0.3em;
-    &__label, &__control {
-        box-sizing: border-box;
-        width: 50%;
-    }
     &__label {
         text-align: right;
         padding-right: 1em;
+        min-width: 150px;
+        flex: 1;
+    }
+    &__display, &__control {
+        padding: 6px 12px;
+        flex: 2;
     }
     &__control {
         border: 1px solid #ccc;
-        padding: 6px 12px;
         &:focus {
             outline: none;
         }
