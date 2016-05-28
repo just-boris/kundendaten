@@ -8,7 +8,7 @@ export default function Select(props) {
 
     return (<Input {...inputProps}>
         <select className="input__control" onChange={e => onChange(props.name, e.target.value)}>
-            {options.map(({value, name}) => <option value={value}>{name}</option>)}
+            {options.map(({value, name}) => <option value={value} key={value}>{name}</option>)}
         </select>
     </Input>);
 }

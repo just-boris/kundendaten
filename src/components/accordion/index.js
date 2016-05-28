@@ -1,5 +1,9 @@
 import './styles.css';
 import {PropTypes, Component} from 'react';
+import bem from 'bem-cn';
+import Collapse from 'react-collapse';
+
+const b = bem('accordion');
 
 export default class Accordion extends Component {
     constructor(props, context) {
@@ -17,9 +21,14 @@ export default class Accordion extends Component {
     render() {
         const {title, children} = this.props;
         const {open} = this.state;
-        return (<div className="accordion">
-            <h2 className="accordion__title" onClick={this.toggle}>{title}</h2>
-            {open ? <div className="accordion__body">{children}</div> : ''}
+        return (<div className={b({open})}>
+            <h2 className={b('title')} onClick={this.toggle}>
+                {title}
+                <span className={b('icon')}></span>
+            </h2>
+            <Collapse isOpened={open}>
+                {open ? <div className={b('body')}>{children}</div> : ''}
+            </Collapse>
         </div>);
     }
 }

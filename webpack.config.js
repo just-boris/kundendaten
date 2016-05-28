@@ -1,3 +1,4 @@
+/*eslint-env node*/
 const webpack = require('webpack');
 const HtmlWebpakPlugin = require('html-webpack-plugin');
 const path = require('path');
@@ -12,9 +13,12 @@ module.exports = {
         filename: 'app.js'
     },
 
+    devtool: 'source-map',
+
     module: {
         loaders: [
             {test: /\.js$/, exclude: /node_modules/, loader: 'babel'},
+            {test: /\.svg$/, loader: 'url'},
             {test: /\.css$/, loader: 'style!css!postcss'}
         ]
     },
@@ -41,4 +45,4 @@ module.exports = {
     devServer: {
         contentBase: 'build'
     }
-}
+};

@@ -7,7 +7,19 @@
         cursor: pointer;
         border-bottom: 1px solid $border-accent-color;
     }
+    &__icon {
+        float: right;
+        background: url(./icon.svg);
+        width: 22px;
+        height: 22px;
+        margin-right: 10px;
+        background-size: contain;
+        transition: transform 0.3s;
+        .accordion_open & {
+            transform: rotate(180deg);
+        }
+    }
     &__body {
-        padding-top: 1em;
+        padding: 1em 0;
     }
 }
