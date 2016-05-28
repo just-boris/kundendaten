@@ -4,6 +4,7 @@ import {addApplicant, updateApplicant, removeApplicant, saveApplicant} from '../
 import PersonEdit from '../person-edit';
 import IncomeEdit from '../income-edit';
 import ExpenseEdit from '../expense-edit';
+import HouseholdEdit from '../household-edit';
 import Output from '../output';
 
 function App({applicants, addApplicant, updateApplicant, removeApplicant, saveApplicant}) {
@@ -28,6 +29,7 @@ function App({applicants, addApplicant, updateApplicant, removeApplicant, saveAp
         <div className="app__row"><PersonEdit applicants={applicants} onChange={updateApplicant} /></div>
         <div className="app__row"><IncomeEdit applicants={applicants} onChange={updateApplicant} /></div>
         <div className="app__row"><ExpenseEdit applicants={applicants} onChange={updateApplicant} /></div>
+        <div className="app__row"><HouseholdEdit applicants={applicants} onChange={updateApplicant} /></div>
         <div className="app__row">
             <h2 className="accordion__title">Gesamt</h2>
             <div className="accordion__body applicants">
