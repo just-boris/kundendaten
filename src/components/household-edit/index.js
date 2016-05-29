@@ -25,25 +25,39 @@ const estateType = [
     {value: 'NONE', name: 'Kein Immobilienbesitz'}
 ];
 
+function fieldConfig(name, data, onChange) {
+    const path = name.split('.');
+    return {
+        name, value: data.getIn(path),
+        onChange(name, value) {
+            onChange(path, value);
+        }
+    };
+}
+
 function ApplicantHousehold({applicant, index, onChange}) {
     const handleChange = (name, value) => onChange(index, name, value);
     const sharedSettings = index > 0 ? (<div>
-        <Select label="Beziehung zwischen KN" name="applicantsRelationshipType"
-            value={applicant.applicantsRelationshipType} options={relationshipOptions}
-            onChange={handleChange} />
-        <Checkbox label="Gemeinsamer Haushalt" name="sharedHousehold" onChange={handleChange} />
+        <Select label="Beziehung zwischen KN" options={relationshipOptions}
+            {...fieldConfig('household.applicantsRelationshipType', applicant, handleChange)} />
+        <Checkbox label="Gemeinsamer Haushalt" {...fieldConfig('household.shared', applicant, handleChange)} />
     </div>) : null;
+    const disableFields = applicant.getIn(['household', 'shared']);
     return (<div className="applicants__col">
-        <NumericInput name="numberOfPersonsInHousehold" label="Anzahl Personen im HH" value={applicant.salary} onChange={handleChange} />
-        <NumericInput name="numberOfChildren" label="Davon Kinder" value={applicant.salary} onChange={handleChange} />
-        <Select name="accomodationType" label="Wohnsituation" options={accomodationOptions} onChange={handleChange} />
-        <Select name="fullyRentedEstateType" label="Art der vermieteten Immobilie" options={estateType} onChange={handleChange} />
+        <NumericInput label="Anzahl Personen im HH" disabled={disableFields}
+            {...fieldConfig('household.numberOfPersons', applicant, handleChange)} />
+        <NumericInput label="Davon Kinder" disabled={disableFields}
+            {...fieldConfig('household.numberOfChildren', applicant, handleChange)} />
+        <Select label="Wohnsituation" disabled={disableFields} options={accomodationOptions}
+            {...fieldConfig('household.accomodationType', applicant, handleChange)} />
+        <Select label="Art der vermieteten Immobilie" disabled={disableFields} options={estateType}
+            {...fieldConfig('household.estateType', applicant, handleChange)} />
         {sharedSettings}
     </div>);
 }
 
 
-export default function PersonEdit({applicants, onChange}) {
+export default function HouseholdEdit({applicants, onChange}) {
     return (<Accordion title="Haushalt">
         <div className="applicants">
             {applicants.map((applicant, index) => <ApplicantHousehold key={index} {...{applicant, index, onChange}} />)}

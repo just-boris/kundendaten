@@ -4,10 +4,10 @@ import omit from 'lodash/omit';
 
 export default function Select(props) {
     const inputProps = omit(props, ['options', 'onChange']);
-    const {options, onChange} = props;
+    const {options, disabled, value, onChange} = props;
 
     return (<Input {...inputProps}>
-        <select className="input__control" onChange={e => onChange(props.name, e.target.value)}>
+        <select className="input__control" disabled={disabled} defaultValue={value} onChange={e => onChange(props.name, e.target.value)}>
             <option key="" value="">-- Bitte auswählen --</option>
             {options.map(({value, name}) => <option value={value} key={value}>{name}</option>)}
         </select>
@@ -17,5 +17,6 @@ export default function Select(props) {
 Select.propTypes = {
     onChange: PropTypes.func,
     name: PropTypes.string,
+    disabled: PropTypes.bool,
     options: PropTypes.arrayOf(PropTypes.object)
 };

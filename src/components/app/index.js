@@ -35,7 +35,7 @@ function App({applicants, addApplicant, updateApplicant, removeApplicant, saveAp
             <div className="accordion__body applicants">
                 {applicants.map((applicant, index) => {
                     return (<div className="applicants__col" key={index}>
-                        <Output name="total" label="Ergebnis" value={applicant.total} />
+                        <Output name="total" label="Ergebnis" value={applicant.get('total')} />
                     </div>);
                 })}
             </div>

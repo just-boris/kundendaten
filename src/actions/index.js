@@ -16,15 +16,15 @@ export function removeApplicant(applicant) {
     };
 }
 
-export function updateApplicant(index, fieldName, value) {
+export function updateApplicant(index, field, value) {
   return {
     type: UPDATE_APPLICANT,
-    index, fieldName, value
+    field, index, value
   };
 }
 
 export function saveApplicant() {
   return (dispatch, getState) => {
-      console.log(getState().applicants); //eslint-disable-line no-console
+      console.log(getState().applicants.map(applicant => applicant.toJSON())); //eslint-disable-line no-console
   };
 }
