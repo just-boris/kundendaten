@@ -4,7 +4,7 @@ import {PropTypes} from 'react';
 export default function Checkbox({label, name, value, onChange}) {
     return (<label className="checkbox">
         <input type="checkbox" className="checkbox__control"
-            name={name} defaultChecked={value} onChange={(e) => onChange(e.target.name, e.target.checked)} />
+            name={name} checked={value} onChange={(e) => onChange(e.target.name, e.target.checked)} />
         <span className="checkbox__label">{label}</span>
     </label>);
 }
@@ -17,5 +17,6 @@ Checkbox.propTypes = {
 };
 
 Checkbox.defaultProps = {
+    value: false,
     onChange() {}
 };

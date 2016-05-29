@@ -7,7 +7,7 @@ export default function Select(props) {
     const {options, disabled, value, onChange} = props;
 
     return (<Input {...inputProps}>
-        <select className="input__control" disabled={disabled} defaultValue={value} onChange={e => onChange(props.name, e.target.value)}>
+        <select className="input__control" disabled={disabled} value={value} onChange={e => onChange(props.name, e.target.value)}>
             <option key="" value="">-- Bitte auswählen --</option>
             {options.map(({value, name}) => <option value={value} key={value}>{name}</option>)}
         </select>

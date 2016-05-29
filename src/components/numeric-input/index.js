@@ -1,8 +1,9 @@
 import Input from '../input';
 import {PropTypes} from 'react';
+import isNumber from 'lodash/isNumber';
 
 function formatNumber(number) {
-    return number && number.toString().replace('.', ',');
+    return isNumber(number) ? number.toString().replace('.', ',') : number;
 }
 
 function parseNumber(numberString) {
