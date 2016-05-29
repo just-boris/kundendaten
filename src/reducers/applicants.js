@@ -36,7 +36,7 @@ function applicantReducer(state, action) {
     switch (action.type) {
         case UPDATE_APPLICANT: {
             return state.withMutations(state =>
-                state.setIn(action.field, action.value).set('total', calculateTotal(state))
+                state.setIn(action.field.split('.'), action.value).set('total', calculateTotal(state))
             );
         }
         default:
@@ -45,10 +45,9 @@ function applicantReducer(state, action) {
 }
 
 function updateApplicant(state, action) {
-    const field = action.field.join('.');
     const sharedHousehold = state.find(applicant => applicant.getIn(['household', 'shared']));
-    const syncField = sharedHousehold && SHARED_HOSEHOLD_FIELDS.indexOf(field) > -1;
-    if(field === 'household.shared' && action.value) {
+    const syncField = sharedHousehold && SHARED_HOSEHOLD_FIELDS.indexOf(action.field) > -1;
+    if(action.field === 'household.shared' && action.value) {
         state = applySharedHousehold(...state);
     }
     return state.map((applicant, index) => {

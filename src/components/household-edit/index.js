@@ -2,6 +2,8 @@ import Accordion from '../accordion';
 import NumericInput from '../numeric-input';
 import Select from '../select';
 import Checkbox from '../checkbox';
+import Applicants from '../applicants';
+import fieldConfig from '../../util/buildFieldConfig';
 
 const relationshipOptions = [
     {value: 'LIFE_PARTNER', name: 'Lebenspartner'},
@@ -25,16 +27,6 @@ const estateType = [
     {value: 'NONE', name: 'Kein Immobilienbesitz'}
 ];
 
-function fieldConfig(name, data, onChange) {
-    const path = name.split('.');
-    return {
-        name, value: data.getIn(path),
-        onChange(name, value) {
-            onChange(path, value);
-        }
-    };
-}
-
 function ApplicantHousehold({applicant, index, onChange}) {
     const handleChange = (name, value) => onChange(index, name, value);
     const sharedSettings = index > 0 ? (<div>
@@ -56,11 +48,10 @@ function ApplicantHousehold({applicant, index, onChange}) {
     </div>);
 }
 
-
 export default function HouseholdEdit({applicants, onChange}) {
     return (<Accordion title="Haushalt">
-        <div className="applicants">
-            {applicants.map((applicant, index) => <ApplicantHousehold key={index} {...{applicant, index, onChange}} />)}
-        </div>
+        <Applicants applicants={applicants}>
+            {(applicant, index) => <ApplicantHousehold key={index} {...{applicant, index, onChange}} />}
+        </Applicants>
     </Accordion>);
 }
