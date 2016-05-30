@@ -1,15 +1,16 @@
 import {ADD_APPLICANT, REMOVE_APPLICANT, UPDATE_APPLICANT} from '../actions';
 import Immutable from 'immutable';
+import path from '../util/path';
 
 function newApplicant() {
     return Immutable.fromJS({total: 0});
 }
 
 function calculateTotal(state) {
-    const salary = state.get('salary', 0);
-    const otherIncome = state.get('otherIncome', 0);
-    const rent = state.get('rent', 0);
-    const otherExpense = state.get('otherExpense', 0);
+    const salary = state.getIn(path('income.salary'), 0);
+    const otherIncome = state.getIn(path('income.other'), 0);
+    const rent = state.getIn(path('expense.rent'), 0);
+    const otherExpense = state.getIn(path('expense.other'), 0);
     return salary + otherIncome - rent - otherExpense;
 }
 
@@ -25,8 +26,7 @@ function applySharedHousehold(source, ...applicants) {
         source,
         ...applicants.map(applicant => applicant.withMutations(applicant => {
             return SHARED_HOSEHOLD_FIELDS.reduce((applicant, field) => {
-                const path = field.split('.');
-                return applicant.setIn(path, source.getIn(path));
+                return applicant.setIn(path(field), source.getIn(path(field)));
             }, applicant);
         }))
     ];
