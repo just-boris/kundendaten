@@ -9,7 +9,7 @@
     "pretest": "eslint src/ test/ util/",
     "test": "npm run mocha",
     "mocha": "mocha --require babel-register --require ./util/setup --recursive test/",
-    "coverage": "nyc npm run mocha"
+    "coverage": "istanbul cover node_modules/.bin/_mocha -- --require babel-register --require ./util/setup --recursive test/"
   },
   "author": "",
   "license": "ISC",
@@ -32,9 +32,9 @@
     "expect": "^1.20.1",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.17.0",
+    "istanbul": "^1.0.0-alpha.2",
     "jsdom": "^9.2.1",
     "mocha": "^2.5.3",
-    "nyc": "^6.4.4",
     "postcss-import": "^8.1.2",
     "postcss-loader": "^0.9.1",
     "precss": "^1.4.0",
