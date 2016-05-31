@@ -22,17 +22,7 @@ describe('applicants reducer', function() {
     it('should update applicant by index and field name', function() {
         this.store.dispatch(updateApplicant(0, 'personal.name', 'Tester'));
         expect(this.getApplicant(0)).toBeImmutable({
-            personal: {name: 'Tester'},
-            total: 0
+            personal: {name: 'Tester'}
         });
-    });
-
-    it('should calculate total value', function() {
-        this.store.dispatch(updateApplicant(0, 'income.salary', 1000));
-        this.store.dispatch(updateApplicant(0, 'income.other', 10));
-        expect(this.getApplicant(0).get('total')).toBe(1010);
-        this.store.dispatch(updateApplicant(0, 'expense.rent', 400));
-        this.store.dispatch(updateApplicant(0, 'expense.other', 10));
-        expect(this.getApplicant(0).get('total')).toBe(600);
     });
 });

@@ -5,7 +5,7 @@ import PersonEdit from '../person-edit';
 import IncomeEdit from '../income-edit';
 import ExpenseEdit from '../expense-edit';
 import HouseholdEdit from '../household-edit';
-import Output from '../output';
+import SummaryOutput from '../summary-output';
 
 function App({applicants, addApplicant, updateApplicant, removeApplicant, saveApplicant}) {
     function onSubmit(e) {
@@ -30,16 +30,7 @@ function App({applicants, addApplicant, updateApplicant, removeApplicant, saveAp
         <div className="app__row"><IncomeEdit applicants={applicants} onChange={updateApplicant} /></div>
         <div className="app__row"><ExpenseEdit applicants={applicants} onChange={updateApplicant} /></div>
         <div className="app__row"><HouseholdEdit applicants={applicants} onChange={updateApplicant} /></div>
-        <div className="app__row">
-            <h2 className="accordion__title">Gesamt</h2>
-            <div className="accordion__body applicants">
-                {applicants.map((applicant, index) => {
-                    return (<div className="applicants__col" key={index}>
-                        <Output name="total" label="Ergebnis" value={applicant.get('total')} />
-                    </div>);
-                })}
-            </div>
-        </div>
+        <div className="app__row"><SummaryOutput applicants={applicants} /></div>
         <div className="app__row app__row_center">
             <button type="submit" className="app__save">Spreichen</button>
         </div>
