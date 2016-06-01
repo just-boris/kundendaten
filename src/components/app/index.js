@@ -7,7 +7,7 @@ import ExpenseEdit from '../expense-edit';
 import HouseholdEdit from '../household-edit';
 import SummaryOutput from '../summary-output';
 
-function App({applicants, addApplicant, updateApplicant, removeApplicant, saveApplicant}) {
+export function App({applicants, addApplicant, updateApplicant, removeApplicant, saveApplicant}) {
     function onSubmit(e) {
         e.preventDefault();
         saveApplicant();
