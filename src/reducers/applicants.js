@@ -2,10 +2,6 @@ import {ADD_APPLICANT, REMOVE_APPLICANT, UPDATE_APPLICANT} from '../actions';
 import {Map} from 'immutable';
 import path from '../util/path';
 
-function newApplicant() {
-    return new Map();
-}
-
 const SHARED_HOSEHOLD_FIELDS = [
     'household.numberOfPersons',
     'household.numberOfChildren',
@@ -13,35 +9,31 @@ const SHARED_HOSEHOLD_FIELDS = [
     'household.estateType'
 ];
 
+function newApplicant() {
+    return new Map();
+}
+
 function applySharedHousehold(source, ...applicants) {
     return [
         source,
         ...applicants.map(applicant => applicant.withMutations(applicant => {
-            return SHARED_HOSEHOLD_FIELDS.reduce((applicant, field) => {
-                return applicant.setIn(path(field), source.getIn(path(field)));
-            }, applicant);
-        }))
+            SHARED_HOSEHOLD_FIELDS.forEach(field =>
+                applicant.setIn(path(field), source.getIn(path(field)))
+           );
+       }))
     ];
 }
 
-function applicantReducer(state, action) {
-    switch (action.type) {
-        case UPDATE_APPLICANT:
-            return state.setIn(action.field.split('.'), action.value);
-        default:
-            return state;
-    }
-}
-
 function updateApplicant(state, action) {
-    const sharedHousehold = state.find(applicant => applicant.getIn(['household', 'shared']));
+    const sharedHousehold = state.find(applicant => applicant.getIn(path('household.shared')));
     const syncField = sharedHousehold && SHARED_HOSEHOLD_FIELDS.indexOf(action.field) > -1;
+
     if(action.field === 'household.shared' && action.value) {
         state = applySharedHousehold(...state);
     }
     return state.map((applicant, index) => {
         if(action.index === index || syncField) {
-            return applicantReducer(applicant, action);
+            return applicant.setIn(path(action.field), action.value);
         }
         return applicant;
     });
