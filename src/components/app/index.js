@@ -21,7 +21,7 @@ export function App({applicants, addApplicant, updateApplicant, removeApplicant,
             const allowRemove = index > 0;
             return (<div className="applicants__col" key={index}>
                 { allowAdd && <a className="app__action" onClick={addApplicant}>Fügen zweite Antragsteller</a> }
-                { allowRemove && <a className="app__action" onClick={() => removeApplicant(applicant)}>Entfernen zweite Antragsteller</a> }
+                { allowRemove && <a className="app__action" onClick={() => removeApplicant(index)}>Entfernen zweite Antragsteller</a> }
                 <h2 className="app__title">Antragsteller #{index + 1}</h2>
             </div>);
         })}

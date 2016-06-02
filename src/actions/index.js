@@ -9,10 +9,10 @@ export function addApplicant() {
     };
 }
 
-export function removeApplicant(applicant) {
+export function removeApplicant(index) {
     return {
         type: REMOVE_APPLICANT,
-        applicant
+        index
     };
 }
 

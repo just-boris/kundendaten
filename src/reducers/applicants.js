@@ -44,7 +44,7 @@ export default function(state = [newApplicant()], action) {
         case ADD_APPLICANT:
             return [...state, newApplicant()];
         case REMOVE_APPLICANT:
-            return state.filter(applicant => applicant !== action.applicant);
+            return state.filter((applicant, index) => index !== action.index);
         case UPDATE_APPLICANT:
             return updateApplicant(state, action);
         default:

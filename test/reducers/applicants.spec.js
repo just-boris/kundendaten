@@ -8,15 +8,11 @@ describe('applicants reducer', function() {
         this.getApplicant = (index) => this.store.getState()[index];
     });
 
-    it('should add applicant', function() {
+    it('should add and remove applicant', function() {
         this.store.dispatch(addApplicant());
         expect(this.store.getState()).toHaveLength(2);
-    });
-
-    it('should remove applicant', function() {
-        const applicant = this.getApplicant(0);
-        this.store.dispatch(removeApplicant(applicant));
-        expect(this.store.getState()).toHaveLength(0);
+        this.store.dispatch(removeApplicant(1));
+        expect(this.store.getState()).toHaveLength(1);
     });
 
     it('should update applicant by index and field name', function() {
