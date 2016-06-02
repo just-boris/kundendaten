@@ -8,13 +8,13 @@
         background: #f6f5f3;
         font-weight: normal;
     }
-    &__row {
+    &__content {
         max-width: 900px;
         margin: 0 auto;
         padding: 1em;
-        &_center {
-            text-align: center;
-        }
+    }
+    &__center {
+        text-align: center;
     }
     &__save {
         cursor: pointer;
@@ -25,7 +25,7 @@
         border: 0;
     }
     &__title {
-        margin: 0 0 0.5em;
+        margin: 0 0 1em;
     }
     &__action {
         float: right;
@@ -36,17 +36,6 @@
         color: #4f81ee;
         &:hover {
             color: #3d64b9;
-        }
-    }
-}
-
-.applicants {
-    display: flex;
-    justify-content: center;
-    &__col {
-        flex: 1;
-        & + & {
-            margin-left: 1em;
         }
     }
 }

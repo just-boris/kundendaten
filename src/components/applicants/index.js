@@ -1,3 +1,6 @@
+import './style.css';
+import {array, func} from 'react/lib/ReactPropTypes';
+
 export default function Applicants({applicants, children}) {
     return (<div className="applicants">
         {applicants.map((applicant, index) =>
@@ -5,3 +8,8 @@ export default function Applicants({applicants, children}) {
         )}
     </div>);
 }
+
+Applicants.propTypes = {
+    applicants: array,
+    children: func
+};

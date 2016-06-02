@@ -1,0 +1,10 @@
+.applicants {
+    display: flex;
+    justify-content: center;
+    &__col {
+        flex: 1;
+        & + & {
+            margin-left: 1em;
+        }
+    }
+}

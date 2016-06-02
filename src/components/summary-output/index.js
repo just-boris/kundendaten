@@ -1,6 +1,5 @@
 import {createSelector} from 'reselect';
 import path from '../../util/path';
-import Applicants from '../applicants';
 import Output from '../output';
 
 const totalSelector = createSelector(
@@ -11,13 +10,6 @@ const totalSelector = createSelector(
     (salary, otherIncome, rent, otherExpense) => salary + otherIncome - rent - otherExpense
 );
 
-export default function SummaryOutput({applicants}) {
-    return (<div>
-        <h2 className="accordion__title">Gesamt</h2>
-        <div className="accordion__body">
-            <Applicants applicants={applicants}>{(applicant) =>
-                <Output name="total" label="Ergebnis" value={totalSelector(applicant)} />
-            }</Applicants>
-        </div>
-    </div>);
+export default function SummaryOutput({applicant}) {
+    return <Output name="total" label="Ergebnis" value={totalSelector(applicant)} />;
 }

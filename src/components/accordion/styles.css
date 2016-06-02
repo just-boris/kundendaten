@@ -1,6 +1,7 @@
 @import "../../variables";
 
 .accordion {
+    margin-bottom: 1em;
     &__title {
         margin: 0;
         padding-bottom: 0.5em;
