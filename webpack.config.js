@@ -5,9 +5,7 @@ const path = require('path');
 const NODE_ENV = process.argv.indexOf('--optimize-minimize') > -1 ? 'production' : 'development';
 
 module.exports = {
-    entry: {
-        app: './src'
-    },
+    entry: ['./src'],
 
     output: {
         path: path.join(__dirname, 'build'),
