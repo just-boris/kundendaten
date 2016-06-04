@@ -2,11 +2,15 @@ import './styles.css';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import store from './store';
-import App from './components/app';
+import {Router, Route, browserHistory} from 'react-router';
+import Account from './components/account';
+import AccountsList from './components/accounts-list';
 
-import React from 'react';
-window.React = React;
-
-const content = <Provider store={store}><App/></Provider>;
+const content = (<Provider store={store}>
+    <Router history={browserHistory}>
+      <Route path="/" component={AccountsList} />
+      <Route path="/:accountId" component={Account} />
+    </Router>
+</Provider>);
 
 render(content, document.getElementById('app'));

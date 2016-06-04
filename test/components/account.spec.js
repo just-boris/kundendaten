@@ -1,7 +1,7 @@
 import {mount} from 'enzyme';
 import {createSpy} from 'expect';
 import {fromJS} from 'immutable';
-import {App} from '../../src/components/app';
+import {Account} from '../../src/components/account';
 
 const defaultApplicants = [
     fromJS({personal: {name: 'First', lastName: 'User'}})
@@ -15,9 +15,10 @@ function Page(wrapper) {
 function setup(applicants = defaultApplicants) {
     const addApplicant = createSpy();
     const removeApplicant = createSpy();
-    const component = mount(<App {...{addApplicant, removeApplicant, applicants}} />);
+    const loadApplicants = createSpy().andReturn(Promise.resolve());
+    const component = mount(<Account {...{loadApplicants, addApplicant, removeApplicant, applicants, params: {}}} />);
     const page = new Page(component);
-    return {component, page, addApplicant, removeApplicant};
+    return {component, page, loadApplicants, addApplicant, removeApplicant};
 }
 
 describe('App', function() {

@@ -9,6 +9,7 @@ const compiler = webpack(config);
 module.exports = new webpackDevServer(compiler, {
     contentBase: './target/www',
     stats: { colors: true },
+    historyApiFallback: true,
     inline: true,
     hot: true
 });

@@ -1,8 +1,9 @@
 import './styles.css';
 import {Component} from 'react';
-import {array, func} from 'react/lib/ReactPropTypes';
+import {array, func, object} from 'react/lib/ReactPropTypes';
 import {connect} from 'react-redux';
-import {addApplicant, updateApplicant, removeApplicant, saveApplicant} from '../../actions';
+import {loadApplicants, saveApplicants, addApplicant, updateApplicant, removeApplicant} from '../../actions';
+import Header from '../header';
 import Accordion from '../accordion';
 import Applicants from '../applicants';
 import PersonEdit from '../person-edit';
@@ -11,9 +12,10 @@ import ExpenseEdit from '../expense-edit';
 import HouseholdEdit from '../household-edit';
 import SummaryOutput from '../summary-output';
 
-export class App extends Component {
+export class Account extends Component {
     constructor(props) {
         super(props);
+        this.state = {};
         this.onSubmit = this.onSubmit.bind(this);
         this.renderApplicantHeader = this.renderApplicantHeader.bind(this);
         this.subComponents = [
@@ -24,9 +26,20 @@ export class App extends Component {
         ];
     }
 
+    componentWillMount() {
+        const {accountId} = this.props.params;
+        this.setState({loading: true});
+        this.props.loadApplicants(accountId).then(() =>
+            this.setState({loading: false})
+        ).catch(e =>
+            console.error(e) // eslint-disable-line no-console
+        );
+    }
+
     onSubmit(e) {
+        const {params, saveApplicants} = this.props;
         e.preventDefault();
-        this.props.saveApplicant();
+        saveApplicants(params.accountId);
     }
 
     createEditBlock(title, EditComponent) {
@@ -53,7 +66,7 @@ export class App extends Component {
     render() {
         const {applicants} = this.props;
         return (<form className="app" onSubmit={this.onSubmit}>
-            <h1 className="app__header">Kundendaten</h1>
+            <Header />
             <div className="app__content">
                 <Applicants applicants={applicants}>{this.renderApplicantHeader}</Applicants>
                 {this.subComponents.map(render => render())}
@@ -73,9 +86,11 @@ export class App extends Component {
     }
 }
 
-App.propTypes = {
+Account.propTypes = {
+    params: object,
     applicants: array,
     addApplicant: func,
+    loadApplicants: func,
     updateApplicant: func,
     removeApplicant: func,
     saveApplicant: func
@@ -85,6 +100,6 @@ function mapProps({applicants}) {
     return {applicants};
 }
 
-const mapActions = {addApplicant, updateApplicant, removeApplicant, saveApplicant};
+const mapActions = {loadApplicants, saveApplicants, addApplicant, updateApplicant, removeApplicant};
 
-export default connect(mapProps, mapActions)(App);
+export default connect(mapProps, mapActions)(Account);

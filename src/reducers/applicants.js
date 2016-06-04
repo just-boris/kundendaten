@@ -1,5 +1,5 @@
-import {ADD_APPLICANT, REMOVE_APPLICANT, UPDATE_APPLICANT} from '../actions';
-import {Map} from 'immutable';
+import {LOAD_APPLICANTS, ADD_APPLICANT, REMOVE_APPLICANT, UPDATE_APPLICANT} from '../actions';
+import {Map, fromJS} from 'immutable';
 import path from '../util/path';
 
 const SHARED_HOSEHOLD_FIELDS = [
@@ -41,6 +41,8 @@ function updateApplicant(state, action) {
 
 export default function(state = [newApplicant()], action) {
     switch (action.type) {
+        case LOAD_APPLICANTS:
+            return action.applicants.map(applicant => fromJS(applicant));
         case ADD_APPLICANT:
             return [...state, newApplicant()];
         case REMOVE_APPLICANT:

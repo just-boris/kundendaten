@@ -5,9 +5,10 @@ const app = express();
 app.use(bodyParser.json());
 
 var accounts = [
-    {id: 123, person: {firstName: 'Joe', lastName: 'Test'}},
-    {id: 125, person: {firstName: 'Bob', lastName: 'Jack'}}
+    {id: 1, applicants: [{person: {firstName: 'Joe', lastName: 'Test'}}]},
+    {id: 2, applicants: [{person: {firstName: 'Bob', lastName: 'Jack'}}]}
 ];
+var accountCounter = accounts.length + 1;
 
 function readAccount(id) {
     return new Promise((resolve, reject) => {
@@ -34,7 +35,12 @@ function promiseResource(handler) {
 
 app.get('/accounts', promiseResource(() => accounts));
 app.get('/accounts/:id', promiseResource((req) => readAccount(req.params.id)));
-app.post('/accounts', promiseResource((req) => accounts.push(req.body)));
+app.post('/accounts', promiseResource((req) => {
+    const account = req.body;
+    account.id = ++accountCounter;
+    accounts.push(account);
+    return account;
+}));
 app.put('/accounts/:id', promiseResource((req) =>
     readAccount(req.params.id).then(account =>
         Object.assign(account, req.body)
