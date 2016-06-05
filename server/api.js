@@ -6,7 +6,10 @@ app.use(bodyParser.json());
 
 var accounts = [
     {id: 1, applicants: [{person: {firstName: 'Joe', lastName: 'Test'}}]},
-    {id: 2, applicants: [{person: {firstName: 'Bob', lastName: 'Jack'}}]}
+    {id: 2, applicants: [
+        {person: {firstName: 'Bob', lastName: 'Jack'}},
+        {person: {firstName: 'Alice', lastName: 'Jack'}}
+    ]}
 ];
 var accountCounter = accounts.length + 1;
 

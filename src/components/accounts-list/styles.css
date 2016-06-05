@@ -1,0 +1,31 @@
+@import "../../variables.css";
+
+.accounts-list {
+    &__content {
+        padding: 0 1em;
+    }
+    &__table {
+        list-style-type: none;
+        padding: 0;
+    }
+    &__row {
+        display: flex;
+        border-top: 1px solid $border-accent-color;
+        &_head {
+            font-weight: bold;
+        }
+        &_link {
+            color: $text-color;
+            text-decoration: none;
+            &:hover {
+                background: #c1e1f7;
+            }
+        }
+    }
+    &__col {
+        padding: 0.5em 1em;
+        &_number {
+            min-width: 50px;
+        }
+    }
+}
