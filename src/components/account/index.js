@@ -93,7 +93,7 @@ Account.propTypes = {
     loadApplicants: func,
     updateApplicant: func,
     removeApplicant: func,
-    saveApplicant: func
+    saveApplicants: func
 };
 
 function mapProps({applicants}) {

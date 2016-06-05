@@ -1,5 +1,6 @@
 import './styles.css';
 import {Component} from 'react';
+import {array, func} from 'react/lib/ReactPropTypes';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import Header from '../header';
@@ -55,5 +56,10 @@ export class AccountsList extends Component {
         </div>);
     }
 }
+
+AccountsList.propTypes = {
+    accounts: array,
+    loadAccounts: func
+};
 
 export default connect(({accounts}) => ({accounts}), {loadAccounts})(AccountsList);

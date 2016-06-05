@@ -12,16 +12,21 @@ function Page(wrapper) {
     this.applicant = (index) => this.applicants().at(index);
 }
 
-function setup(applicants = defaultApplicants) {
+function setup(applicants = defaultApplicants, accountId) {
     const addApplicant = createSpy();
     const removeApplicant = createSpy();
     const loadApplicants = createSpy().andReturn(Promise.resolve());
-    const component = mount(<Account {...{loadApplicants, addApplicant, removeApplicant, applicants, params: {}}} />);
+    const component = mount(<Account {...{loadApplicants, addApplicant, removeApplicant, applicants, params: {accountId}}} />);
     const page = new Page(component);
     return {component, page, loadApplicants, addApplicant, removeApplicant};
 }
 
 describe('App', function() {
+    it('should request applicants on render', function() {
+        const {loadApplicants} = setup([], 1);
+        expect(loadApplicants).toHaveBeenCalledWith(1);
+    });
+
     it('should add second applicant', function() {
         const {page, addApplicant} = setup();
         expect(page.applicants()).toHaveLength(1);

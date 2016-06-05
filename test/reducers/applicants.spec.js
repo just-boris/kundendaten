@@ -1,24 +1,59 @@
-import {createStore} from 'redux';
+import AxiosMock from 'axios-mock-adapter';
+import axious from 'axios';
+import {combineReducers} from 'redux';
+import createStore from '../../src/store';
 import applicants from '../../src/reducers/applicants';
-import {addApplicant, removeApplicant, updateApplicant} from '../../src/actions';
+import {loadApplicants, saveApplicants, addApplicant, removeApplicant, updateApplicant} from '../../src/actions';
 
 describe('applicants reducer', function() {
     beforeEach(function() {
-        this.store = createStore(applicants);
-        this.getApplicant = (index) => this.store.getState()[index];
+        this.server = new AxiosMock(axious);
+        this.store = createStore(combineReducers({applicants}));
+        this.getApplicants = () => this.store.getState().applicants;
+        this.getApplicant = (index) => this.getApplicants()[index];
+    });
+
+    afterEach(function() {
+        this.server.restore();
+    });
+
+    it('should load applicants by id', function() {
+        this.server.onGet('/api/accounts/1').reply(200, {
+          id: 1,
+          applicants: [{personal: {firstName: 'Tester'}}]
+        });
+        return this.store.dispatch(loadApplicants(1)).then(() => {
+            expect(this.getApplicant(0)).toBeImmutable({personal: {firstName: 'Tester'}});
+        });
     });
 
     it('should add and remove applicant', function() {
         this.store.dispatch(addApplicant());
-        expect(this.store.getState()).toHaveLength(2);
+        expect(this.getApplicants()).toHaveLength(2);
         this.store.dispatch(removeApplicant(1));
-        expect(this.store.getState()).toHaveLength(1);
+        expect(this.getApplicants()).toHaveLength(1);
     });
 
     it('should update applicant by index and field name', function() {
         this.store.dispatch(updateApplicant(0, 'personal.name', 'Tester'));
         expect(this.getApplicant(0)).toBeImmutable({
             personal: {name: 'Tester'}
+        });
+    });
+
+    it('should save applicants data to server', function() {
+        this.store.dispatch(updateApplicant(0, 'personal.lastName', 'User'));
+        this.server.onPut('/api/accounts/1').reply(config => {
+            const expectedResponse = {
+                id: 1,
+                applicants: [{personal: {lastName: 'User'}}]
+            };
+            expect(config.data).toEqual(JSON.stringify(expectedResponse));
+            return [200, expectedResponse];
+        });
+
+        return this.store.dispatch(saveApplicants(1)).then(response => {
+            expect(response.data.applicants).toExist();
         });
     });
 
