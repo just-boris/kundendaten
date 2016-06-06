@@ -8,7 +8,7 @@ const defaultApplicants = [
 ];
 
 function Page(wrapper) {
-    this.applicants = () => wrapper.find('.app__applicant');
+    this.applicants = () => wrapper.find('.account__applicant');
     this.applicant = (index) => this.applicants().at(index);
 }
 
@@ -30,7 +30,7 @@ describe('App', function() {
     it('should add second applicant', function() {
         const {page, addApplicant} = setup();
         expect(page.applicants()).toHaveLength(1);
-        page.applicant(0).find('.app__action').simulate('click');
+        page.applicant(0).find('.account__action').simulate('click');
         expect(addApplicant).toHaveBeenCalled();
     });
 
@@ -40,9 +40,9 @@ describe('App', function() {
             fromJS({personal: {name: 'Second', lastName: 'User'}})
         ]);
         expect(page.applicants()).toHaveLength(2);
-        expect(page.applicant(0).find('.app__action')).toHaveLength(0);
-        expect(page.applicant(1).find('.app__action')).toHaveLength(1);
-        page.applicant(1).find('.app__action').simulate('click');
+        expect(page.applicant(0).find('.account__action')).toHaveLength(0);
+        expect(page.applicant(1).find('.account__action')).toHaveLength(1);
+        page.applicant(1).find('.account__action').simulate('click');
         expect(removeApplicant).toHaveBeenCalled();
     });
 });

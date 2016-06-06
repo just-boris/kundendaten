@@ -1,0 +1,32 @@
+@import "../../variables.css";
+
+.button {
+    cursor: pointer;
+    padding: 0.8em 1.5em 0.75em 1.5em;
+    font-size: 11px;
+    background: $background-default;
+    color: $text-color;
+    border: 0;
+    &:active {
+        box-shadow: inset 0 0 5px 0 #aaa;
+    }
+    &_size_L {
+        font-size: 14px;
+    }
+    &_skin_action {
+        background: $primary-color;
+        color: #fff;
+        &:hover {
+            background: color($primary-color lightness(+5%));
+        }
+        &:active {
+            box-shadow: inset 0 0 5px 0 #616161;
+        }
+    }
+    &_skin_secondary {
+        background: $secondary-color;
+        &:hover {
+            background: color($secondary-color lightness(+5%));
+        }
+    }
+}

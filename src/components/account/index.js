@@ -2,15 +2,19 @@ import './styles.css';
 import {Component} from 'react';
 import {array, func, object} from 'react/lib/ReactPropTypes';
 import {connect} from 'react-redux';
+import bem from 'bem-cn';
 import {loadApplicants, saveApplicants, addApplicant, updateApplicant, removeApplicant} from '../../actions';
 import Header from '../header';
 import Accordion from '../accordion';
+import Button from '../button';
 import Applicants from '../applicants';
 import PersonEdit from '../person-edit';
 import IncomeEdit from '../income-edit';
 import ExpenseEdit from '../expense-edit';
 import HouseholdEdit from '../household-edit';
 import SummaryOutput from '../summary-output';
+
+const b = bem('account');
 
 export class Account extends Component {
     constructor(props) {
@@ -56,18 +60,22 @@ export class Account extends Component {
         const {addApplicant, removeApplicant, applicants} = this.props;
         const allowAdd = applicants.length < 2;
         const allowRemove = index > 0;
-        return (<div className="app__applicant">
-            { allowAdd && <a className="app__action" onClick={addApplicant}>Fügen zweite Antragsteller</a> }
-            { allowRemove && <a className="app__action" onClick={() => removeApplicant(index)}>Entfernen zweite Antragsteller</a> }
-            <h2 className="app__title">Antragsteller #{index + 1}</h2>
+        return (<div className={b('applicant')}>
+            { allowAdd && <Button className={b('action') + ''} skin="secondary" onClick={addApplicant}>
+                Fügen zweite Antragsteller
+            </Button> }
+            { allowRemove && <Button className={b('action') + ''} skin="secondary" onClick={() => removeApplicant(index)}>
+                Entfernen zweite Antragsteller
+            </Button> }
+            <h2 className={b('title')}>Antragsteller #{index + 1}</h2>
         </div>);
     }
 
     render() {
         const {applicants} = this.props;
-        return (<form className="app" onSubmit={this.onSubmit}>
+        return (<form className={b()} onSubmit={this.onSubmit}>
             <Header />
-            <div className="app__content">
+            <div className={b('content')}>
                 <Applicants applicants={applicants}>{this.renderApplicantHeader}</Applicants>
                 {this.subComponents.map(render => render())}
                 <div className="accordion">
@@ -78,9 +86,9 @@ export class Account extends Component {
                         </Applicants>
                     </div>
                 </div>
-                <div className="app__center">
-                    <button type="submit" className="app__save">Spreichen</button>
-                </div>
+            </div>
+            <div className={b('footer')}>
+                <Button type="submit" size="L" skin="action">Spreichen</Button>
             </div>
         </form>);
     }

@@ -5,7 +5,7 @@
         content: ' ';
         display: inline-block;
         width: 33.33%;
-        min-width: 150px;
+        min-width: 180px;
     }
     &__control {
         margin-right: 0.5em;

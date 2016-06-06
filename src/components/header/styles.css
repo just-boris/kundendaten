@@ -1,9 +1,17 @@
 @import "../../variables.css";
 
 .header {
+    font-size: 18px;
     margin: 0;
-    padding: 0.5em 1em;
+    padding: 1em;
     border-bottom: 1px solid $border-accent-color;
     background: #f6f5f3;
     font-weight: normal;
+    &__link {
+        color: $primary-color;
+        text-decoration: none;
+        &:hover {
+            color: color($primary-color lightness(-5%));
+        }
+    }
 }
