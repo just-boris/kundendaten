@@ -10,4 +10,5 @@ Some application to edit user data
 4. `npm start`
 
 If you would like run tests, use `npm test`
+
 For production build run `npm run build`. Files will be at `build` directory
