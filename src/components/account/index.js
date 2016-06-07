@@ -61,10 +61,10 @@ export class Account extends Component {
         const allowAdd = applicants.length < 2;
         const allowRemove = index > 0;
         return (<div className={b('applicant')}>
-            { allowAdd && <Button className={b('action') + ''} skin="secondary" onClick={addApplicant}>
+            { allowAdd && <Button className={b('action')()} skin="secondary" onClick={addApplicant}>
                 Fügen zweite Antragsteller
             </Button> }
-            { allowRemove && <Button className={b('action') + ''} skin="secondary" onClick={() => removeApplicant(index)}>
+            { allowRemove && <Button className={b('action')()} skin="secondary" onClick={() => removeApplicant(index)}>
                 Entfernen zweite Antragsteller
             </Button> }
             <h2 className={b('title')}>Antragsteller #{index + 1}</h2>
